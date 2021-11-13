@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script>
+        //1.使用prompt接收用户输入的数字（需要将输入转换为数字，如果用户输入的内容不能成功转换为数字，应让用户再一次输入，直到能转换成数字为止），再将用户输入的数字平方后通过alert展示。
+        var input = prompt("直接输入一个数字\n请输入一个数字：");
+        var flag = 1;
+
+        function checkRate(input) {　　
+            var re = /^[0-9]+.?[0-9]*/; //判断字符串是否为数字//判断正整数/[1−9]+[0−9]∗]∗/;//判断字符串是否为数字//判断正整数/[1−9]+[0−9]∗]∗/
+            if (!re.test(nubmer)) {　　　　
+                flag = -1;
+
+            }
+        }
+        do {
+            if (flag === -1) {
+                var input = prompt("你未输入正确的数字，请重新输入：");
+            }
+        } while (flag !== 1)
+        input2 = Math.pow(parseInt(input), 2);
+        alert("你输入的数字平方后为：" + input2);
+    </script>
+</body>
+
+</html>

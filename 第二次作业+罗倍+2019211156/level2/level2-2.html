@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //**********************************************
+        //2.函数递归实现数组扁平化。
+        var arr = [1, [2, 3], 4, [5, [6, [7, 8]]],
+            [9, 10]
+        ];
+        res = []; //用来存储返回的数据
+
+        function fun1(arr) {
+            //code
+            var result = [];
+            for (var i = 0, len = arr.length; i < len; i++) {
+                if (Array.isArray(arr[i])) { //判断里面是否还有数组
+                    result = result.concat(fun1(arr[i])); //递归
+                } else {
+                    result.push(arr[i]);
+                }
+            }
+            return result;
+
+        }
+        res = fun1(arr);
+
+        console.log(res); //[1,2,3,4,5,6,7,8,9,10];
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
