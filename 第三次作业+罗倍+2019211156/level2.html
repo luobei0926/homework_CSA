@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--要求：自行查找重定义this的方法，实现输出课程名字、学期数和输出性别各自有两种方法，前者（构造函数的继承）只要求一种（另一种需要原型链相关知识，此为后续课程），后者要求两种方法都写
+提示：只需适当修改学生对象的构造函数（继承构造函数采用原型链则不用）
+-->
+    <script>
+        function course() {
+            this.coursename = "CSA前端培训";
+            this.semester = 2;
+        }
+
+        function student(name, age, gender) {
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+            this.moreinfo = function() {
+                let that = this;
+                var detail = function() {
+                    console.log(that.gender); //由于在内部函数中将外部对象（obj）的this同名覆盖了，如果预先将外部的this保存在一个不会被覆盖的量中，便可在内部函数中直接使用。
+                }
+                detail();
+            };
+            course.call(this); //写代码实现“学生”继承“课程”
+        }
+
+        var student1 = new student("小明", 18, "男");
+        console.log(student1);
+        console.log(student1.coursename, student1.semester); //课程名字和第几期
+        student1.moreinfo(); //你的性别
+    </script>
+</body>
+
+</html>

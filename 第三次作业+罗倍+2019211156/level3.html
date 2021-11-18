@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!---->
+    <script>
+        var data = {
+            age: 18,
+            name: "这是真的难",
+            education: ["小学", "初中", "高中", "大学", undefined, null],
+            friends: [{
+                name: "Amber",
+                sex: "woman"
+            }, {
+                name: "Barbara",
+                sex: "woman"
+            }, {
+                name: "Venti",
+                sex: "man"
+            }],
+            work: {
+                time: "2021",
+                project: {
+                    name: "test",
+                    obtain: ["css", "html", "js"]
+                }
+            },
+            play: function() {
+                console.log("玩滑板");
+            }
+        };
+        // 判断是否为对象
+        function isObject(o) {
+            return (typeof o === 'object' || typeof o === 'function') && o !== null
+        }
+
+        function deepClone(obj, hash = new WeakMap()) {
+            if (!isObject(obj)) {
+                return obj
+            }
+            // 查表
+            if (hash.has(obj)) return hash.get(obj)
+
+            let isArray = Array.isArray(obj)
+            let cloneObj = isArray ? [] : {}
+                // 哈希表设值
+            hash.set(obj, cloneObj)
+
+            let result = Object.keys(obj).map(key => {
+                return {
+                    [key]: deepClone(obj[key], hash)
+                }
+            })
+            return Object.assign(cloneObj, ...result)
+        }
+
+        var copy_data = deepClone(data);
+        console.log(copy_data);
+    </script>
+</body>
+
+</html>
