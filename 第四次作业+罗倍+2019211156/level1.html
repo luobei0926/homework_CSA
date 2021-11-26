@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+        }
+        
+        .change_color {
+            width: 500px;
+            height: 100px;
+            background-color: rgb(221, 209, 209);
+            border: 0;
+            margin: 0 auto;
+            margin-bottom: 50px;
+        }
+        
+        .change_font {
+            width: 500px;
+            height: 100px;
+            background-color: rgb(221, 209, 209);
+            border: 0;
+            margin: 0 auto;
+            margin-bottom: 50px;
+        }
+        
+        p {
+            text-align: center;
+            border-bottom: solid 4px rgb(187, 162, 167);
+            height: 30px;
+        }
+        
+        button {
+            margin-left: 75px;
+            width: 60px;
+            height: 40px;
+            background-color: pink;
+        }
+        
+        .eg {
+            width: 500px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: green;
+            color: white;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!--自己写一个简单的页面，实现以下几个按钮功能
+● 主题颜色更改按钮：点击后，可以更改页面主题颜色
+● 字体大小更改按钮：点击后，可以更改字体大小（最少三个大小）-->
+    <div class="change_color">
+        <p>小可爱有魔法哦，让我们来看看页面颜色变化魔法吧</p>
+        <button class="red">red</button>
+        <button class="pink">pink</button>
+        <button class="blue">blue</button>
+    </div>
+
+    <div class="change_font">
+        <p>小可爱有魔法哦，让我们来看看字体大小变化魔法吧</p>
+        <button class="biger">biger</button>
+        <button class="big">big</button>
+        <button class="small">small</button>
+    </div>
+    <div class="eg">我是变化的字体大小</div>
+
+
+    <script>
+        let red = document.querySelector(".red");
+        let pink = document.querySelector(".pink");
+        let blue = document.querySelector(".blue");
+        let body = document.querySelector("body");
+        red.onclick = function() {
+            body.style.background = "red";
+        };
+        pink.onclick = function() {
+            body.style.background = "pink";
+        };
+        blue.onclick = function() {
+            body.style.background = "blue";
+        };
+
+        ///
+        let biger = document.querySelector(".biger");
+        let big = document.querySelector(".big");
+        let small = document.querySelector(".small");
+        let eg = document.querySelector(".eg");
+        biger.onclick = function() {
+            eg.style.fontSize = 36 + 'px';
+        };
+        big.onclick = function() {
+            eg.style.fontSize = 26 + 'px';
+        };
+        small.onclick = function() {
+            eg.style.fontSize = 16 + 'px';
+        };
+    </script>
+</body>
+
+</html>
