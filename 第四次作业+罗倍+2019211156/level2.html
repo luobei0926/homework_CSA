@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            color: transparent;
+        }
+    </style>
+</head>
+<!--对于下列列表：
+● 实现点击不同的 li  能打印出所对应的内容（通过事件委托）
+● 通过 js  设置 单数li背景颜色为红色 , 双数 li为绿色-->
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <script>
+        window.onload = function() {
+            var oUl = document.querySelector("ul");
+            var aLi = oUl.querySelectorAll("li");
+            for (var i = 0; i < aLi.length; i++) {
+                console.log(i);
+                if (i % 2 == 0) {
+
+                    aLi[i].style.backgroundColor = "red";
+                } else {
+                    aLi[i].style.backgroundColor = "green";
+                }
+            }
+            /*
+            这里要用到事件源：event 对象，事件源，不管在哪个事件中，只要你操作的那个元素就是事件源。
+            ie：window.event.srcElement
+            标准下:event.targets
+            nodeName:找到元素的标签名
+            */
+            oUl.onclick = function(ev) {
+                var ev = ev || window.event;
+                var target = ev.target || ev.srcElement;
+                if (target.nodeName.toLowerCase() == "li") {
+                    console.log(target.innerHTML);
+                    // alert(target.innerHTML);
+                };
+            };
+        }
+    </script>
+</body>
+
+</html>
