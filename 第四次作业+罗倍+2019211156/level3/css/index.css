@@ -1,0 +1,83 @@
+header {
+    background-color: rgb(158, 190, 159);
+    margin: 50px auto;
+    height: 300px;
+    width: 500px;
+    position: relative;
+}
+
+header p {
+    position: absolute;
+    display: block;
+    margin-top: 10px;
+    margin-left: 180px;
+    color: #4CAF50;
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+header textarea {
+    position: absolute;
+    width: 480px;
+    height: 200px;
+    border: 0;
+    top: 40px;
+    margin: 10px 0px 0px 10px;
+}
+
+header button {
+    height: 30px;
+    /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    background-color: #4CAF50;
+    margin-top: 260px;
+    margin-left: 450px;
+    /* Green */
+}
+
+.ju {
+    margin: 0 auto;
+    width: 500px;
+}
+
+ol {
+    margin: 0px;
+    list-style-position: inside;
+    list-style: none;
+    padding: 0;
+}
+
+ol li {
+    text-align: center;
+    font-size: large;
+    border-bottom: 2px solid white;
+    width: 500px;
+    max-height: 10s0px;
+    min-height: 50px;
+    line-height: 50px;
+    background-color: rgb(194, 218, 198);
+    border-left: solid 8px rgb(147, 184, 147);
+    position: relative;
+    text-align: center;
+}
+
+ol li p {
+    display: inline;
+    line-height: 1px;
+}
+
+a {
+    float: right;
+    color: white;
+    display: inline;
+    width: 20px;
+    height: 16px;
+    margin-top: 17px;
+    margin-right: 18px;
+    background-color: rgb(101, 133, 80);
+}
