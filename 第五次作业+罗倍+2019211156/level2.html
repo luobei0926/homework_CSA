@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../网易云/jquery.min.js"></script>
+    <title>Document</title>
+    <style type="text/css">
+        .all {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: rgb(240, 234, 235);
+        }
+        
+        #ulul li {
+            width: 800px;
+            display: flex;
+            min-height: 30px;
+            max-height: 80px;
+            justify-content: center;
+            color: rgb(104, 101, 101);
+        }
+        
+        #ulul .top {
+            font-size: large;
+            font-weight: bolder;
+        }
+        
+        span {
+            margin-left: 3px;
+        }
+        
+        #ulul li:nth-of-type(odd) {
+            background-color: #ccc;
+        }
+        
+        #ulul li span:nth-child(1) {
+            width: 10%;
+        }
+        
+        #ulul li span:nth-child(n+2) {
+            width: 30%;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <div class="all">
+        <div class="two">
+            <h3>网易云音乐</h3>
+            请输入要查询的歌曲：<input type="text" value="" id="info" />
+            <button id="btn">查询</button>
+
+
+            <h4>歌曲列表</h4>
+            <ul id="ulul">
+                <li class="top"><span>序号</span><span>音乐标题</span>
+                    <span>歌手</span><span>专辑</span></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script>
+        var btn = document.querySelector("button");
+        var info = document.getElementById("info");
+
+
+        btn.onclick = function() {
+            var value = info.value;
+            console.log(value);
+            data = {
+                "keywords": value,
+                "limit": 30,
+            };
+            ajax_all_Filed("true", "false", "GET", "http://cloud-music.pl-fe.cn/search?keywords=" + value, "json", data, myfunc); //调用函数
+            function ajax_all_Filed(sync, cache, type, url, datatype, data, func) { //封装ajax的一些常用参数  //data数据可以为空
+                $.ajax({
+                    async: sync,
+                    cache: cache,
+                    type: type,
+                    url: url,
+                    dataType: datatype,
+                    data: data,
+                    success: function(data) {
+                        console.log(data['result']['songs'].length);
+                        var html = "";
+                        var w = 1;
+                        html += "<li class='top'><span>" + "序号" + "</span><span>" + "音乐标题" + "</span><span>" + "歌手" + "</span><span>" + "专辑" + "</span></li>";
+                        for (var i = 0; i < data['result']['songs'].length; i++) { //遍历data数组 
+                            var ls = data['result']['songs'][i];
+
+                            console.log(ls);
+                            console.log(ls.artists[0].name); // console.log(JSON.stringify(ls));
+                            html += "<li><span>" + w + "</span><span>" + ls.name + "</span><span>" + ls.artists[0].name + "</span><span>" + ls.album.name + "</span></li>";
+                            w += 1;
+                        }
+                        $("#ulul").html(html); //在html页面id=ulul的标签里显示html内容
+                    },
+                    error: function(data1) {
+                        console.log("22");
+                    }
+                });
+            }
+
+        }
+    </script>
+</body>
+
+</html>
