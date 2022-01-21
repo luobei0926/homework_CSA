@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/myutils.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/Mock.js/1.0.0/mock-min.js"></script>
+    <script src="js/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/mock.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="index">
+        <div class="header">
+
+            <div class="search_btn"></div>
+            <div class="city">北京</div>
+        </div>
+        <div class="info_box">
+            <div id="head_bg" class="head_bg"></div>
+            <div class="info">
+
+                <div class="div1">
+                    <a class="a_1" href="#">
+                        <img class="img_1" src="img/黄色的花.png"> 疫情资讯
+                    </a>
+                    <a class="a_2" href="#">
+                        <img class="img_1" src="img/安全出行.png"> 安全出行
+                    </a>
+                </div>
+                <div class="info_wea" id="info_wea" weatherid="2">阴</div>
+                <div class="info_about">
+                    <em class="wendu">1</em>
+
+                    <p class='fengli'>&nbsp;</p>
+                    <p>天冷了，该加衣服了！</p>
+                </div>
+                <div class="info_aqi">
+                    <ul>
+                        <li>
+                            <a href="">
+                                <span class="info_warn warn_3">
+                                    <img src="img/白色叶子.png" alt="aqi">
+                                </span>
+                                <strong class='sidu'>88 良</strong>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="days">
+                    <div class="single">
+                        <div>
+                            <em>今天</em>
+                            <span class="warn_2">良</span> <b class="wencha">8 / 13°</b>
+                        </div>
+                        <div class="leftt">
+                            <strong class="tod_qk">阴</strong>
+
+                        </div>
+                    </div>
+                    <div class="single">
+                        <div>
+                            <em>明天</em>
+                            <span class="warn_2 nextday">良</span> <b class="next_wencha">8 / 14°</b>
+                        </div>
+                        <div class="rightt">
+                            <strong class="next_qk">多云</strong>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="wind_temp">
+                    <div class="tabs">
+                        <strong class='sunset'>日落 17:59</strong>
+                        <span class="active">温度</span>
+                        <span>风力</span>
+                        <em class="btn">24小时</em>
+                    </div>
+                    <div class="charts active" id="temp_box">
+                        <canvas id="temp" height="220" width="2000" _echarts_instance_="ec_1640007751291" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none;"></canvas>
+                        <span id="temp_num">10°</span>
+                    </div>
+                    <div class="charts" id="wind_box">
+                        <canvas id="wind" height="220" width="2000" _echarts_instance_="ec_1640007751292" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none;"></canvas>
+                        <span id="wind_num" class="wind_numm">2级</span>
+                    </div>
+                </div>
+                <div class="weak_wea">
+                    <canvas class="week_line" id="weekLine" width="710" height="246" _echarts_instance_="ec_1640007751290" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); user-select: none;"></canvas>
+                    <ul>
+                        <li data-high="11" data-low="8">
+                            <em class='date_week'>周日</em>
+                            <dl class="wea_up">
+
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">良</p>
+                            <dl class="wind">
+
+                            </dl>
+                        </li>
+                        <li data-high="13" data-low="8">
+                            <em class='date_week'>周一</em>
+                            <dl class="wea_up">
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">良</p>
+                            <dl class="wind">
+
+                            </dl>
+                        </li>
+                        <li data-high="14" data-low="8">
+                            <em class='date_week'>周二</em>
+                            <dl class="wea_up">
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">良</p>
+                            <dl class="wind">
+
+                            </dl>
+                        </li>
+                        <li data-high="15" data-low="8">
+                            <em class='date_week'>周三</em>
+                            <dl class="wea_up">
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">轻度</p>
+                            <dl class="wind">
+
+                            </dl>
+                        </li>
+                        <li data-high="12" data-low="9">
+                            <em class='date_week'>周四</em>
+                            <dl class="wea_up">
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">轻度</p>
+                            <dl class="wind">
+
+                            </dl>
+                        </li>
+                        <li data-high="11" data-low="8">
+                            <em class='date_week'>周五</em>
+                            <dl class="wea_up">
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">良</p>
+                            <dl class="wind">
+
+                            </dl>
+                        </li>
+                        <li data-high="13" data-low="8">
+                            <em class='date_week'>周五</em>
+                            <dl class="wea_up">
+
+                            </dl>
+                            <div></div>
+                            <dl class="wea_down">
+
+                            </dl>
+                            <p class="aqi warn_3">良</p>
+                            <dl class="wind">
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="exponent">
+                    <ul>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>约会 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>美发 适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>舒适度 舒适</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>路况 干燥</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>运动 不适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>逛街 适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>钓鱼 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>防晒 中等</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>雨伞 不带伞</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>风寒 凉</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>猫咪 不适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>心情 好</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>感冒 可能</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>狗狗 适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>广场舞 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>放风筝 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>旅游 适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>晨练 适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>晾晒 基本适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>洗车 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>空气污染扩散 较差</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>空调开启 较少开启</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>息斯敏过敏 不易发</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>中暑 不易中暑</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>交通 良好</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>划船 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>化妆 控油</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>啤酒 较不适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>夜生活 较适宜</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>穿衣 温凉</em>
+                        </li>
+                        <li>
+                            <span>
+                                                                <img src="img/星星.png">
+                                                        </span>
+                            <em>紫外线 最弱</em>
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="footer">
+                    本页面由
+                    <em>墨迹天气</em> 提供
+                </div>
+            </div>
+
+        </div>
+        <div id="download" style="width: 100%;position: fixed;bottom: 0;left: 0;z-index: 999999;">
+            <div style="display: block;"><img src="img/moji_logo.png" style="display: block;width:100%;"><span id="close_btn" style="position: absolute;right: 4%;top: 30%;width: 33px;height: 33px;"></span></div>
+        </div>
+        <script>
+            var search_btn = document.getElementsByClassName('search_btn')[0];
+            search_btn.onclick = function() {
+                window.location.href = "http://127.0.0.1:5500/期末复习作业/search.html";
+            }
+        </script>
+
+        <script type="text/javascript">
+            var citynum = location.search.slice(location.search.indexOf('=') + 1, location.search.indexOf('&')); // 从location对象中的search属性得到地址栏里 ? 后面的参数       【接参】
+            console.log(citynum);
+            console.log(location.search.slice(location.search.indexOf('=') + 1, -1)); // 从location对象中的search属性得到地址栏里 ? 后面的参数       【接参】)
+
+            $(function() {
+                Mock.mock('/mockTest', {
+                    "daily|7": [{ //生成|num个如下格式名字的数据
+                        // "id|+1": 1, //初始值是1每次id都+1
+                        "humidity|0-100": 0, //年龄为18-28之间的随机数字
+                        "sunset": '@time("H:m")',
+                        "tempMax|11-40": 25,
+                        "tempMin|-5-10": 25,
+                        "textDay|1": ['晴', '多云', '雨', '阴', '雪'],
+                        "textNight|1": ['晴', '多云', '雨', '阴', '雪'],
+                        "windDirDay|1": ['西南风', '东南风', '西北风', '东北风', '南风', '东风', '西风', '北风'],
+                        "windScaleDay|1-30": 3,
+                        "windSpeedDay|1-30": 3,
+                        "env|1": ['优', '良', '轻度', '中度', '严重'],
+                        "img_info_up|1": ['img/雨.png', 'img/月.png', 'img/云.png', 'img/多云.png', 'img/晴.png'],
+                        "img_info_down|1": ['img/雨.png', 'img/月.png', 'img/云.png', 'img/多云.png', 'img/晴.png'],
+                    }]
+                })
+
+                //ajax接收数据，通过jq
+                $.get('/mockTest', function(data) {
+
+                        var data = JSON.parse(data);
+                        console.log(data);
+                        var weaup = document.querySelectorAll(".wea_up");
+                        var weadown = document.querySelectorAll(".wea_down");
+                        document.querySelector(".warn_2").innerHTML = data['daily'][0]['env'];
+                        document.querySelector(".tod_qk").innerHTML = data['daily'][0]['textDay'];
+                        document.querySelector(".fengli").innerHTML = data['daily'][0]['windDirDay'] + data['daily'][0]['windScaleDay'] + '级 湿度' + data['daily'][0]['humidity'] + "%";
+                        document.querySelector(".sidu").innerHTML = data['daily'][0]['humidity'] + ' 良';
+                        document.querySelector(".info_wea").innerHTML = data['daily'][0]['textDay'];
+                        document.querySelector(".wind_numm").innerHTML = data['daily'][0]['windSpeedDay'];
+                        document.querySelector(".wencha").innerHTML = data['daily'][0]['tempMin'] + ' / ' + data['daily'][0]['tempMax'] + "°";
+                        document.querySelector(".sunset").innerHTML = '日落 ' + data['daily'][0]['sunset'];
+                        document.querySelector(".wendu").innerHTML = parseInt((parseInt(data['daily'][0]['tempMax']) + parseInt(data['daily'][0]['tempMin'])) / 2);
+                        document.querySelector(".next_wencha").innerHTML = data['daily'][1]['tempMin'] + ' / ' + data['daily'][1]['tempMax'] + "°";
+                        document.querySelector(".next_qk").innerHTML = data['daily'][1]['textDay'];
+                        document.querySelector(".nextday").innerHTML = data['daily'][1]['env'];
+                        console.log(decodeURI(location.search.slice(location.search.indexOf('e=') + 2, location.search.length)));
+                        var imgg = document.createElement('img');
+                        if (document.querySelector(".tod_qk").innerHTML == "晴") {
+                            imgg.src = "img/晴_早.png";
+                        }
+                        if (document.querySelector(".tod_qk").innerHTML == "多云") {
+                            imgg.src = "img/多云_早.png";
+                        }
+                        if (document.querySelector(".tod_qk").innerHTML == "阴") {
+                            imgg.src = "img/云.png";
+                        }
+                        if (document.querySelector(".tod_qk").innerHTML == "雨") {
+                            imgg.src = "img/雨.png";
+                        }
+                        if (document.querySelector(".tod_qk").innerHTML == "雪") {
+                            imgg.src = "img/雪_早.png";
+                        }
+                        document.querySelector(".leftt").appendChild(imgg);
+                        var img = document.createElement('img');
+                        if (document.querySelector(".next_qk").innerHTML == "晴") {
+                            img.src = "img/晴_早.png";
+                        }
+                        if (document.querySelector(".next_qk").innerHTML == "多云") {
+                            img.src = "img/多云_早.png";
+                        }
+                        if (document.querySelector(".next_qk").innerHTML == "阴") {
+                            img.src = "img/云.png";
+                        }
+                        if (document.querySelector(".next_qk").innerHTML == "雨") {
+                            img.src = "img/雨.png";
+                        }
+                        if (document.querySelector(".next_qk").innerHTML == "雪") {
+                            img.src = "img/雪_早.png";
+                        }
+                        document.querySelector(".rightt").appendChild(img);
+                        document.querySelector(".city").innerHTML = "北京";
+                        if (decodeURI(location.search.slice(location.search.indexOf('e=') + 2, location.search.length))) {
+                            document.querySelector(".city").innerHTML = decodeURI(location.search.slice(location.search.indexOf('e=') + 2, location.search.length));
+
+                        }
+                        var ems = document.querySelectorAll(".date_week");
+                        console.log(ems.length);
+                        /* var weekDay = ["周天", "周一", "周二", "周三", "周四", "周五", "周六"];
+                            console.log(data['daily']);
+                            // 从location对象中的search属性得到地址栏里 ? 后面的参数       【接参】
+*/
+
+                        var weath_min = [];
+                        var weath_max = [];
+                        var week = [];
+                        var weath_day = [];
+                        var weath_night = [];
+                        var i = 0;
+                        for (i = 0; i < data['daily'].length; i++) {
+                            console.log(document.querySelectorAll(".aqi"))
+                            document.querySelectorAll(".aqi")[i].innerHTML = data['daily'][i]['env'];
+                            var x = document.createElement('img');
+                            var y = document.createElement('dt');
+                            var d = document.createElement('dd');
+                            var stro = document.createElement('strong');
+                            stro.innerHTML = data['daily'][i]['textDay'];
+                            d.appendChild(stro);
+                            y.appendChild(x);
+                            if (stro.innerHTML == "晴") {
+                                x.src = "img/晴_早.png";
+                            }
+                            if (stro.innerHTML == "多云") {
+                                x.src = "img/多云_早.png";
+                            }
+                            if (stro.innerHTML == "阴") {
+                                x.src = "img/云.png";
+                            }
+                            if (stro.innerHTML == "雨") {
+                                x.src = "img/雨.png";
+                            }
+                            if (stro.innerHTML == "雪") {
+                                x.src = "img/雪_早.png";
+                            }
+                            weaup[i].appendChild(d);
+                            weaup[i].appendChild(y);
+
+                            var xx = document.createElement('img');
+                            var yy = document.createElement('dt');
+                            var dd = document.createElement('dd');
+                            var sstro = document.createElement('strong');
+
+                            yy.appendChild(xx);
+
+                            sstro.innerHTML = data['daily'][i]['textNight'];
+                            if (sstro.innerHTML == "晴") {
+                                xx.src = "img/晴_晚.png";
+                            }
+                            if (sstro.innerHTML == "多云") {
+                                xx.src = "img/多云_晚.png";
+                            }
+                            if (sstro.innerHTML == "阴") {
+                                xx.src = "img/云.png";
+                            }
+                            if (sstro.innerHTML == "雨") {
+                                xx.src = "img/雨.png";
+                            }
+                            if (sstro.innerHTML == "雪") {
+                                xx.src = "img/雪_晚.png";
+                            }
+                            dd.appendChild(sstro);
+
+                            weadown[i].appendChild(dd);
+                            weadown[i].appendChild(yy);
+                            var d_W1 = document.createElement('dd');
+                            var d_W2 = document.createElement('dd');
+                            d_W1.innerHTML = data['daily'][i]['windDirDay'];
+                            d_W2.innerHTML = data['daily'][i]['windSpeedDay'] + "级";
+                            document.querySelectorAll('.wind')[i].appendChild(d_W1);
+                            document.querySelectorAll('.wind')[i].appendChild(d_W2);
+
+                            console.log(data['daily'][i]['fxDate']);
+                            //    var myDate = new Date(Date.parse(data['daily'][i]['fxDate']));
+                            //    week.push(weekDay[myDate.getDay()])
+                            weath_day.push(data['daily'][i]['textDay']);
+                            //ems[i].innerHTML = weekDay[myDate.getDay()];
+                            console.log(week);
+                            weath_max.push(data['daily'][i]['tempMax'])
+
+                            weath_min.push(data['daily'][i]['tempMin'])
+
+                            console.log(data['daily'][i]['tempMin']);
+                        }
+                        var mycharts = echarts.init(document.querySelector(".week_line"));
+                        // 指定图表的配置项和数据
+                        option = {
+
+                            animation: false,
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            egend: {
+                                itemWidth: 10,
+                                itemHeight: 1,
+                                itemGap: 10,
+
+                            },
+
+                            itemStyle: {
+
+                            },
+                            grid: {
+                                left: '2%',
+                                right: '5%',
+                                bottom: '0%',
+                                containLabel: true
+                            },
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {}
+                                }
+                            },
+                            axisLabel: { //坐标轴刻度标签的相关设置
+                                margin: -180, //刻度标签与轴线之间的距离
+
+                            },
+
+                            xAxis: {
+
+                                splitNumber: 7,
+                                show: false,
+                                type: 'category',
+                                boundaryGap: false,
+                                data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                            },
+                            yAxis: {
+
+
+
+                                show: false,
+                                type: 'value'
+                            },
+                            series: [{
+                                    color: 'white',
+                                    symbolSize: 10, // 图表的点的大小
+                                    lineStyle: {
+                                        width: 2,
+                                        color: 'white',
+
+                                    },
+                                    label: {
+                                        normal: {
+                                            textShadowColor: 'transparent',
+                                            textBorderType: 'solid',
+                                            fontFamily: 'Helvetica',
+                                            fontStyle: 'normal',
+                                            textStyle: {
+
+                                                fontSize: 18,
+                                                fontFamily: 'microsoft yahei light',
+                                                fontWeight: 50,
+                                            },
+                                            show: true,
+                                            position: 'top'
+                                        }
+
+                                    },
+
+                                    type: 'line',
+                                    stack: 'Total',
+                                    data: weath_min
+                                }, {
+                                    color: 'white',
+                                    symbolSize: 10, // 图表的点的大小
+                                    lineStyle: {
+                                        width: 2,
+                                        color: 'white',
+
+                                    },
+                                    label: {
+                                        textStyle: {
+
+                                            fontSize: 18,
+                                            fontFamily: 'microsoft yahei light',
+                                            fontWeight: 50,
+                                        },
+                                        show: true,
+                                        position: 'top'
+                                    },
+
+                                    type: 'line',
+                                    stack: 'Total',
+                                    data: weath_max
+                                },
+
+
+                            ]
+                        };
+                        mycharts.setOption(option);
+                        var myChart = echarts.init(document.getElementById('box'));
+                    }
+
+                )
+            })
+        </script>
+        <script type="text/javascript">
+            var citynum = location.search.slice(location.search.indexOf('=') + 1, location.search.indexOf('&')); // 从location对象中的search属性得到地址栏里 ? 后面的参数       【接参】
+            console.log(citynum);
+            console.log(location.search.slice(location.search.indexOf('=') + 1, -1)); // 从location对象中的search属性得到地址栏里 ? 后面的参数       【接参】)
+            /* window.onload = function() {
+                 let url = "https://devapi.qweather.com/v7/weather/3d?location=" + citynum + "&key=295f90dfd4094ca6875e5501749a75bd";
+                 myAjax({
+                     // url: "http://musicapi.leanapp.cn/personalized",
+                     url: url,
+                     success: function(data) {
+
+                         jsonp: "cb",
+                         jsonpCallback: "haha",
+                     }
+                 })
+             };*/
+        </script>
+</body>
+
+</html>

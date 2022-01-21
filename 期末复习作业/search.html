@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/search.css">
+    <script type="text/javascript" src="js/myutils.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="search_all">
+        <div class="top">
+            <img src="img/return.png" class="back">
+            <input class="search" id="search" type="text" value=" 请输入城市名 ">
+        </div>
+        <div class="middle ">
+            <div class="city_now ">
+                <span>当前城市</span>
+                <div class="city "><a href="#">北京</a></div>
+            </div>
+            <div class="city_new">
+                <ul class="add_S">
+                    <li>添加记录</li>
+                    <a href="" class="delete" id="delete">删除</a>
+                </ul>
+                <ul class="city_add ">
+
+                    <li class="city"><a href="#">北京</a></li>
+                </ul>
+            </div>
+            <div class="city_hot ">
+                <div>热搜城市</div>
+                <ul>
+                    <li class="city "><a href="#">杭州</a></li>
+                    <li class="city "><a href="#">上海</a></li>
+                    <li class="city "><a href="#">深圳</a></li>
+                    <li class="city "><a href="#">北京</a></li>
+                    <li class="city "><a href="#">杭州</a></li>
+                    <li class="city "><a href="#">沈阳</a></li>
+                    <li class="city "><a href="#">大连</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="sousuo">
+            <ul class="city_list" id="city_list">
+
+            </ul>
+        </div>
+    </div>
+    <div id="download" style="width: 100%;position: fixed;bottom: 0;left: 0;z-index: 999999;">
+        <div style="display: block;"><img src="https://promo.moji.com/public/images/download_pic2.png" style="display: block;width:100%;"><span id="close_btn" style="position: absolute;right: 4%;top: 30%;width: 33px;height: 33px;"></span></div>
+    </div>
+
+
+    <script>
+        var back = document.getElementsByClassName('back')[0];
+        var input = document.getElementsByClassName('search')[0];
+        var city_s = document.querySelector('.city_add');
+        console.log(city_s);
+        back.onclick = function() {
+            console.log("back ");
+            window.location.href = "http://127.0.0.1:5500/期末复习作业/level4.html";
+        };
+        input.onfocus = function() {
+            console.log(this.value);
+            this.value = '';
+            console.log(document.querySelectorAll(".citys").length);
+            $("#city_list").html("");
+            if (this.value != null) {
+                $(".middle").css({
+                    "display": "none"
+                });
+                $(".sousuo").css({
+                    "visibility": "inherit"
+                });
+            }
+        };
+        input.onblur = function() {
+            this.value = '请输入城市名';
+            this.style.border = '';
+        }
+
+        var add_city = [];
+        $('#search').bind('input propertychange', function() {
+            $("#city_list").html("");
+            var city = input.value;
+            city_s = "";
+
+            let url = " https://geoapi.qweather.com/v2/city/lookup?location=" + city + "&key=295f90dfd4094ca6875e5501749a75bd";
+            myAjax({ // url: "http://musicapi.leanapp.cn/personalized", 
+                url: url,
+                success: function(data) {
+                    $(".sousuo").css({
+                        "visibility": "inherit"
+                    });
+                    $(".middle").css({
+                        "display": "none"
+                    });
+                    var i;
+                    console.log(data);
+                    for (i = 0; i < data['location'].length; i++) {
+                        var x = document.createElement('li');
+                        var y = document.createElement('a');
+                        var param = {
+                            id: data['location'][i]['id'],
+                            name: encodeURI(data['location'][i]['name'])
+                        }
+
+
+
+                        y.href = `./level4.html?id=${param.id}&&name=${param.name}`; // a标签点击时给herf属性赋值：链接和参数     【传参】
+
+
+                        // y.href = ` #`;
+                        x.className = 'citys';
+                        y.className = 'aa';
+                        y.innerHTML = data['location'][i].name;
+                        x.appendChild(y);
+                        document.querySelector(".city_list").appendChild(x);
+                    }
+                    console.log(add_city);
+
+                    $(".aa").one("click", function() {
+                        add_city.push(this.innerHTML);
+                        console.log(add_city);
+                        searchHistory(this.innerHTML);
+                        console.log(localStorage);
+                        //在html页面id=ulul的标签里显示html内容 
+                        /*  for (i = 0; i < add_city.length; i++) {
+                              var xx = document.createElement('li');
+                              var yy = document.createElement('a');
+                              xx.className = 'city';
+                              yy.href = ` #`;
+                              yy.className = 'aa';
+                              yy.innerHTML = add_city[i];
+                              xx.appendChild(yy); //alert(this.innerHTML); 
+                              document.querySelector(".city_add").appendChild(xx); //在html页面id=ulul的标签里显示html内容 }) /* var n=d ocument.createElement( 'li'); n.className='city' ; n.innerHTML=d ata[ 'location'][0].name; //
+
+                          }*/
+                        $(".sousuo").css({
+                            "visibility": "hidden"
+                        });
+                        $(".middle").css({
+                            "display": "block"
+                        });
+
+                    });
+
+
+                },
+                jsonp: "cb",
+                jsonpCallback: "haha",
+            });
+        });
+    </script>
+    <script>
+        /*  function search() {
+                                                                                                                                                                                                                                            $("#search").click(function() {
+
+                                                                                                                                                                                                                                                searchHistory($(".search").val());
+                                                                                                                                                                                                                                                console.log(localStorage);
+                                                                                                                                                                                                                                            });
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                        search();*/
+
+        function searchHistory(search_value) {
+            var len = 16; //设定存储的历史记录个数  alert("11");
+            if (search_value != "" && !judgeRepeat(search_value)) {
+
+                insertToHistoryList(search_value, len);
+                if (localStorage.length < len) //0 1 2 3 4
+                {
+                    localStorage.setItem(localStorage.length, search_value);
+                } else {
+                    for (var i = 0; i < len; ++i) {
+                        if (i == len - 1) {
+                            localStorage.setItem(i, search_value);
+                            return;
+                        }
+                        var next_value = localStorage.getItem(i + 1);
+                        localStorage.setItem(i, next_value);
+                    }
+                }
+
+            }
+        }
+
+        /*如果搜索结果与本地存储相同，
+          则不行存储
+        */
+        function judgeRepeat(search_value) {
+            var repeat_bool = false;
+            for (var key in localStorage) {
+                if (search_value == localStorage.getItem(key)) {
+                    return true;
+                }
+            }
+        }
+
+        /*将搜索结果插入到历史记录中*/
+        function insertToHistoryList(search_value, len) {
+
+            var str = "<li class='city'><a href='#'>" + search_value + "</a></li>";
+            if ($(".city_add").children().length == 0) {
+                $(".city_add").append($(str));
+                alert("ll");
+            } else {
+                if ($(".city-add").children().length < len) {
+                    $(str).insertAfter($(".city_add li:eq(0)"));
+                } else {
+                    $(".city_add li:last").remove(); //超过len个则移除最后一个
+                    $(str).insertAfter($(".city_add li:eq(0)"));
+                }
+            }
+        }
+
+
+        /*初始化历史记录列表*/
+        function buildHistory() {
+            for (var i = 0; i < localStorage.length; ++i) {
+                var str = "<li  class='city'><a href='#'>" + localStorage.getItem(localStorage.length - 1 - i) +
+                    "</a></li>";
+                $(str).appendTo($(".city_add"));
+            }
+        }
+
+        buildHistory();
+
+        /*清空历史搜索记录*/
+        $("#delete").click(function() {
+
+            localStorage.clear();
+            $(".city_add").empty();
+
+        });
+    </script>
+
+</body>
+
+</html>
