@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var excludeSpecial = function(s) {
+            // 去掉转义字符  
+            s = s.match(/[\w\']+/g).join(' ');
+            // 去掉特殊字符  
+            s = s.replace(/d/g, function(m) {
+                return m.toUpperCase();
+
+            });
+            return s;
+        }
+        let str = "I'm?���going�??�to�?�take�??�a?�trip�?�to��?daocheng�?�on��May Day."
+        var str2 = excludeSpecial(str);
+        console.log(str2); // 'I'm going to take a trip to Daocheng on May Day.'
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
