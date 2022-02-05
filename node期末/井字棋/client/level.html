@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="cvs" width="100" height="400"></canvas>
+    <p id="tips">
+        <div id="color"></div>
+        <div id="info"></div>
+    </p>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.1.1/socket.io.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.1.1/socket.io.js"></script>
+    <script>
+        var cvs = document.getElementById('cvs');
+        var color = '';
+        var ctx = cvs.getContext('2d');
+        var socket = io.connect('ws://127.0.0.1:3000');
+        var GRID_SIZE = 40;
+        var H_SIZE = null;
+        var V_SIZE = null;
+
+        var checkerBoard = [];
+        var turn = '';
+        socket.on('conn', function(data) {
+            console.log(data);
+            color = data.color;
+            document.querySelector('#color').innerHTML = color;
+            HORIZONTAL_SIZE = data.hs;
+            VERTICAL_SIZE = data.vs;
+
+            cvs.width = HORIZONTAL_SIZE * GRID_SIZE;
+            cvs.height = VERTICAL_SIZE * GRID_SIZE;
+            init();
+            drawcheckerBoard();
+            if (data.num === 2) init();
+        });
+        socket.on('getcheckerBoard', function(data) {
+            console.log(data);
+
+            checkerBoard = data.checkerBoard;
+            turn = data.turn;
+            if (turn === color) {
+                cvs.onclick = putChess;
+                console.log(11);
+            } else {
+                cvs.onclick = null;
+            }
+
+            document.querySelector('#info').innerHTML = '现在轮到' + turn + '落子';
+            drawcheckerBoard();
+        });
+        socket.on('gameover', function(data) {
+            document.querySelector("#info").innerHTML = (data === 'black' ? '黑棋' : '白棋') + '胜';
+            cvs.onclick = null;
+            console.log("dd");
+            console.log(data);
+        });
+
+        function init() {
+            for (var i = -5; i < HORIZONTAL_SIZE + 5; i++) {
+                checkerBoard[i] = [];
+                for (var j = -5; j < VERTICAL_SIZE + 5; j++) {
+                    checkerBoard[i][j] = {
+                        state: 0,
+                        type: true
+                    };
+                }
+            }
+            if (color === 'null') return;
+
+        }
+
+        function putChess(e) {
+            console.log("put");
+            var x = e.pageX - cvs.offsetLeft;
+            var y = e.pageY - cvs.offsetTop;
+            x = parseInt(x / GRID_SIZE);
+            y = parseInt(y / GRID_SIZE);
+            console.log(checkerBoard[x][y].state);
+            if (checkerBoard[x][y].state) return;
+            drawArc(x, y);
+            socket.emit('putchess', x, y);
+            //  document.getElementById('tips').innerText = (turn === true ? "现在轮到白棋落子" : "现在轮到黑棋落子");
+
+        }
+
+
+        function drawArc(x, y) {
+            ctx.beginPath();
+            ctx.arc(x * GRID_SIZE + GRID_SIZE / 2, y * GRID_SIZE + GRID_SIZE / 2, (GRID_SIZE / 2) * 0.8, 0, 2 * Math.PI);
+            ctx.fillStyle = (checkerBoard[x][y].type === 'white' ? '#eee' : '#000');
+            console.log(turn);
+            ctx.fill();
+            ctx.closePath();
+            checkerBoard[x][y].state = 1;
+            checkerBoard[x][y].type = turn;
+            turn = (turn === 'white' ? 'black' : 'white');
+
+
+        };
+
+        function drawcheckerBoard() {
+            for (var i = 0; i < HORIZONTAL_SIZE; i++) {
+                for (var j = 0; j < VERTICAL_SIZE; j++) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = '#000';
+                    ctx.fillStyle = "#FFC0CB";
+                    ctx.fillRect(i * GRID_SIZE, j * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                    ctx.strokeRect(i * GRID_SIZE, j * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+                    ctx.closePath();
+
+
+                }
+            }
+            for (var i = 0; i < HORIZONTAL_SIZE; i++) {
+                for (var j = 0; j < VERTICAL_SIZE; j++) {
+                    if (checkerBoard[i][j].state) drawArc(i, j);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
